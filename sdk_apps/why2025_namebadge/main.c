@@ -56,7 +56,7 @@ char const *images[]    = {
     "APPS:[why2025_namebadge]Unity-Pride-flag.png",
 };
 
-size_t      greetings_size = 9;
+size_t      greetings_size = 10;
 char const *greetings[]    = {
     "GREETINGS",
     "Hello",
@@ -66,7 +66,8 @@ char const *greetings[]    = {
     "/usr/bin/greet",
     "ping",
     "git commit -a -m \"Hello\"",
-    "printf(\"hello\");"
+    "printf(\"hello\");",
+    "Insert greeting here!",
 };
 
 size_t      intros_size = 4;
