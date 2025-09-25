@@ -95,10 +95,10 @@ char const *hmate[][7]    = {
     "Maho",
     "VVI(11)",
     "Ask",
-    }
+    },
     {
     "She/Her",
-    "Ce/Cir?Cirs/Cirself",
+    "Ce/Cir/Cirs/Cirself",
     "She/Her",
     "She/Her",
     "She/Her",
