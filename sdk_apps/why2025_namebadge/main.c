@@ -44,7 +44,7 @@ char const *images[]    = {
     "APPS:[why2025_namebadge]logo.png",
     "APPS:[why2025_namebadge]Asexual-flag.png",
     "APPS:[why2025_namebadge]Bisexual-flag.png",
-    "APPS:[why2025_namebadge]Gender-Fluid-flag.png",
+    "APPS:[why2025_namebadge]LHS-logo.png",
     "APPS:[why2025_namebadge]Genderqueer-flag.png",
     "APPS:[why2025_namebadge]Intersex-flag.png",
     "APPS:[why2025_namebadge]Lesbian-flag.png",
