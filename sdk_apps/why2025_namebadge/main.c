@@ -58,14 +58,14 @@ char const *images[]    = {
 
 size_t      greetings_size = 9;
 char const *greetings[]    = {
-    "ASSERT",
+    "GREETINGS",
     "Hello",
     "Hello, world!",
     "Bonjour",
     "404 greeting not found",
-    "/usr/bin/fortune",
+    "/usr/bin/greet",
     "ping",
-    "int 21h",
+    "git commit -a -m \"Hello\"",
     "printf(\"hello\");"
 };
 
@@ -79,14 +79,15 @@ char const *intros[]    = {
 
 size_t      names_size = 4;
 char const *names[]    = {
-    "Fabulous",
-    "Fantasatic",
-    "Gorgeous",
-    "Incredible",
+    "Jess",
+    "Jessica",
+    "JessNco",
+    "Jess!",
 };
 
 size_t      hmate_size = 7;
-char const *hmate[]    = {
+char const *hmate[][7]    = {
+    {
     "Ellie",
     "Jaiden",
     "Lone",
@@ -94,14 +95,26 @@ char const *hmate[]    = {
     "Maho",
     "VVI(11)",
     "Ask",
+    }
+    {
+    "She/Her",
+    "Ce/Cir?Cirs/Cirself",
+    "She/Her",
+    "She/Her",
+    "She/Her",
+    "It/Its",
+    "She/They",
+    }
 };
 
-size_t      splash_size = 4;
+size_t      splash_size = 6;
 char const *splash[]    = {
     "Gender",
     "TheEndIsNeverTheEndIsNeverTheEnd",
     "Hold Shift to run",
     "500 Error",
+    "&nbsp;",
+    "Your DOOM!!",
 };
 
 int             running = 1;
@@ -606,9 +619,9 @@ static state_t *init_app(char const *font_path) {
         strcpy(app->lines[0].text, greetings[greet_index]);
         strcpy(app->lines[1].text, intros[intro_index]);
         strcpy(app->lines[2].text, names[name_index]);
-        strcpy(app->lines[3].text, "They/Them");
+        strcpy(app->lines[3].text, hmate[1][hmate_index]);
         strcpy(app->lines[4].text, "Currently fronting:");
-        strcpy(app->lines[5].text, hmate[hmate_index]);
+        strcpy(app->lines[5].text, hmate[0][hmate_index]);
         app->image_index = 0;
         app->splash_index = 0;
     }
@@ -822,8 +835,9 @@ static void handle_key(state_t *app, keyboard_scancode_t scancode) {
         case KEY_SCANCODE_DIAMOND:
             app->hmate_index++;
             app->hmate_index %= hmate_size;
+            strcpy(app->lines[3].text, hmate[1][app->hmate_index]);
             strcpy(app->lines[4].text, "Now fronting:");
-            strcpy(app->lines[5].text, hmate[app->hmate_index]);
+            strcpy(app->lines[5].text, hmate[0][app->hmate_index]);
             app->needs_full_redraw  = true;
 
             app->has_been_edited = true;
@@ -832,6 +846,7 @@ static void handle_key(state_t *app, keyboard_scancode_t scancode) {
         case KEY_SCANCODE_SQUARE:
             app->splash_index++;
             app->splash_index %= splash_size;
+            strcpy(app->lines[3].text, "She/They");
             strcpy(app->lines[4].text, "Now Loading");
             strcpy(app->lines[5].text, splash[app->splash_index]);
             app->needs_full_redraw  = true;
