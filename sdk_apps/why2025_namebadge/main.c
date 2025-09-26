@@ -108,7 +108,7 @@ char const *hmate[][7]    = {
     }
 };
 
-size_t      splash_size = 6;
+size_t      splash_size = 8;
 char const *splash[]    = {
     "Gender",
     "TheEndIsNeverTheEndIsNeverTheEnd",
@@ -116,6 +116,8 @@ char const *splash[]    = {
     "500 Error",
     "&nbsp;",
     "Your DOOM!!",
+    "Witty remark",
+    "SELECT quips FROM Loadingtips;",
 };
 
 int             running = 1;
@@ -292,7 +294,7 @@ static float calculate_font_size(state_t *app, char const *text, int max_width, 
     return min_size;
 }
 
-static void clear_line_area(state_t *app, int line_index) {
+static void clear_line_area(state_t *app, int line_index) { //draws box wow
     int line_height = WINDOW_HEIGHT / NUM_LINES;
     int y_start     = line_index * line_height;
     int y_end       = y_start + line_height;
@@ -314,6 +316,18 @@ static void clear_line_area(state_t *app, int line_index) {
             app->framebuffer[y * WINDOW_WIDTH + x] = black;
         }
     }
+}
+
+static void draw_rect(state_t *app, int x_start, int y_start, int rect_width, int rect_height, uint16_t rect_colour){
+    //function to draw rectagle goes here
+    int x_end   =   x_start + rect_width;
+    int y_end   =   y_start + rect_height;
+
+    for (int y = y_start; y < y_end && y < WINDOW_HEIGHT; y++) {
+        for (int x = x_start; x < x_end && x < WINDOW_WIDTH; x++) {
+            app->framebuffer[y * WINDOW_WIDTH + x] = rect_colour;
+        }
+}
 }
 
 static void render_text_draft(state_t *app, char const *text, int x, int y, float size, color_t color) {
@@ -854,6 +868,14 @@ static void handle_key(state_t *app, keyboard_scancode_t scancode) {
             
             app->has_been_edited = true;
             break;
+        case KEY_SCANCODE_CROSS:
+            strcpy(app->lines[3].text, "She/They");
+            strcpy(app->lines[4].text, "Feel free to talk!");
+            strcpy(app->lines[5].text, "We don't bite (always)");
+            app->needs_full_redraw  = true;
+            
+            app->has_been_edited = true;
+            break;    
 
         case KEY_SCANCODE_ESCAPE: running = 0; break;
     }
